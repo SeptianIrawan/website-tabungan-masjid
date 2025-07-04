@@ -1,0 +1,612 @@
+/* ========================================================================== */
+/* Global Variables & Base Styles */
+/* ========================================================================== */
+
+:root {
+    /* Warna Dasar */
+    --bg-color: #1a1a1a; /* Hampir hitam dari tema login */
+    --text-color: #f0f0f0; /* PUTIH */
+    --placeholder-color: rgba(255, 255, 255, 0.6); /* Untuk teks samar */
+    --form-bg: rgba(255, 255, 255, 0.05); /* Semi-transparan untuk kartu/form (digunakan juga di dashboard) */
+
+    /* Warna Neon */
+    --neon-blue: #00FFFF;
+    --neon-blue-light: #00E5E5;
+    --border-color: rgba(0, 255, 255, 0.3); /* Border neon transparan */
+
+    /* Warna kustom untuk box/info-box agar lebih neon */
+    --neon-info: rgba(0, 191, 255, 0.4);   /* Light blue neon */
+    --neon-success: rgba(0, 255, 127, 0.4); /* Green neon */
+    --neon-warning: rgba(255, 255, 0, 0.4);  /* Yellow neon */
+    --neon-danger: rgba(255, 69, 0, 0.4);   /* Orange-red neon */
+    --neon-primary: rgba(0, 100, 255, 0.4); /* Deeper blue neon */
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif; /* Menggunakan Poppins untuk konsistensi */
+    background-color: var(--bg-color); /* Latar belakang hitam */
+    color: var(--text-color); /* Warna teks default */
+}
+
+.content-wrapper {
+    background-color: var(--bg-color); /* Latar belakang hitam untuk content-wrapper */
+    color: var(--text-color);
+}
+
+/* ========================================================================== */
+/* Sidebar Styling */
+/* ========================================================================== */
+
+.main-sidebar {
+    background-color: var(--bg-color) !important; /* Latar belakang hitam pekat */
+    border-right: 1px solid rgba(0, 255, 255, 0.1); /* Garis neon tipis di sisi kanan */
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.1); /* Glow samar */
+}
+
+/* Brand Logo Styling */
+.brand-link {
+    border-bottom: 1px solid rgba(0, 255, 255, 0.1) !important;
+    color: var(--neon-blue) !important;
+    text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+    transition: all 0.3s ease;
+}
+.brand-link:hover {
+    background-color: rgba(0, 255, 255, 0.05) !important;
+    color: var(--neon-blue-light) !important;
+    text-shadow: 0 0 8px rgba(0, 255, 255, 0.7);
+}
+.brand-link .brand-image {
+    color: var(--neon-blue) !important; /* Warna ikon brand */
+    transition: all 0.3s ease;
+}
+
+/* Menu Item Styling */
+.nav-sidebar .nav-item .nav-link {
+    color: var(--text-color) !important; /* Warna teks menu default */
+    transition: all 0.3s ease;
+}
+.nav-sidebar .nav-item .nav-link .nav-icon {
+    color: var(--text-color) !important; /* Warna ikon menu default */
+    transition: all 0.3s ease;
+}
+
+/* Menu Item Hover State */
+.nav-sidebar .nav-item .nav-link:hover {
+    background-color: rgba(0, 255, 255, 0.1) !important; /* Latar belakang hover neon transparan */
+    color: var(--neon-blue-light) !important; /* Teks hover neon */
+}
+.nav-sidebar .nav-item .nav-link:hover .nav-icon {
+    color: var(--neon-blue-light) !important; /* Ikon hover neon */
+}
+
+/* Menu Item Active State */
+.nav-sidebar .nav-item .nav-link.active {
+    background-color: var(--neon-blue) !important; /* Latar belakang aktif neon */
+    color: var(--bg-color) !important; /* Teks aktif hitam pekat */
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.7); /* Glow aktif */
+    text-shadow: none !important; /* Hilangkan text-shadow dari login jika ada konflik */
+}
+.nav-sidebar .nav-item .nav-link.active .nav-icon {
+    color: var(--bg-color) !important; /* Ikon aktif hitam pekat */
+}
+/* Pastikan active tetap terlihat bagus saat di-hover */
+.nav-sidebar .nav-item .nav-link.active:hover {
+    background-color: var(--neon-blue-light) !important;
+    color: var(--bg-color) !important;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.9);
+}
+
+/* ========================================================================== */
+/* Navbar Styling */
+/* ========================================================================== */
+
+.main-header.navbar {
+    background-color: var(--bg-color) !important; /* Latar belakang hitam pekat */
+    border-bottom: 1px solid rgba(0, 255, 255, 0.1); /* Garis neon tipis di bawah */
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.1); /* Glow samar */
+}
+
+/* Link Navbar Kiri (Pushmenu & Lainnya) */
+.navbar-nav .nav-item .nav-link {
+    color: var(--text-color) !important; /* Warna ikon default */
+    transition: all 0.3s ease;
+}
+.navbar-nav .nav-item .nav-link:hover,
+.navbar-nav .nav-item .nav-link:focus {
+    color: var(--neon-blue) !important; /* Warna ikon neon saat hover/focus */
+    background-color: rgba(0, 255, 255, 0.05) !important; /* Latar belakang transparan saat hover */
+}
+
+/* Tampilan Waktu Sholat (STATIS & Paling Kiri) */
+.prayer-time-container {
+    display: flex; /* Memastikan elemen anak dapat diatur dengan flex */
+    align-items: center; /* Pusatkan secara vertikal */
+    height: 100%; /* Pastikan tinggi sama dengan navbar untuk line-height */
+    /* margin-left: 15px; // Jika diatur inline HTML, pertahankan */
+}
+.prayer-time-text {
+    color: var(--neon-blue); /* Warna teks neon */
+    font-weight: 600;
+    text-shadow: 0 0 5px rgba(0, 255, 255, 0.5); /* Efek glow pada teks */
+    line-height: 38px; /* Pastikan sesuai tinggi navbar */
+    white-space: nowrap; /* Pastikan teks tidak patah baris */
+    overflow: hidden; /* Sembunyikan bagian teks yang melampaui batas */
+    text-overflow: ellipsis; /* Tampilkan elipsis (...) jika teks terpotong */
+}
+.prayer-time-text .fas {
+    color: var(--neon-blue); /* Warna ikon mesjid */
+    margin-right: 8px;
+}
+
+/* Jam Realtime */
+.realtime-clock-display {
+    color: var(--neon-blue); /* Warna teks jam neon */
+    font-family: 'monospace', sans-serif; /* Font monospasi untuk jam */
+    font-size: 1.1em;
+    margin-right: 10px;
+    line-height: 38px;
+    text-shadow: 0 0 5px rgba(0, 255, 255, 0.5); /* Efek glow pada jam */
+}
+.realtime-clock-display .far {
+    color: var(--neon-blue); /* Warna ikon jam */
+    margin-right: 5px;
+}
+
+/* ========================================================================== */
+/* Dashboard Content Styling (Cards, Boxes, Alerts, Charts, Selectors) */
+/* ========================================================================== */
+
+/* Penyesuaian Warna Teks Umum dan Kontras */
+/* Pastikan semua teks default di dalam content-wrapper terlihat */
+.content-wrapper p, 
+.content-wrapper span, 
+.content-wrapper div:not(.icon):not(.progress-bar) {
+    color: var(--text-color); /* Default untuk teks */
+}
+
+/* Link di dalam konten */
+.content-wrapper a:not(.btn):not(.nav-link) {
+    color: var(--neon-blue);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+.content-wrapper a:not(.btn):not(.nav-link):hover {
+    color: var(--neon-blue-light);
+    text-decoration: underline;
+}
+
+/* Teks di dalam tabel (jika ada) */
+.table {
+    color: var(--text-color);
+}
+.table thead th {
+    color: var(--neon-blue); /* Header tabel bisa neon */
+}
+
+/* PERBAIKAN SPESIFIK UNTUK TEKS DI DALAM SMALL/INFO BOX DENGAN BG-CLASS */
+/* Ini akan menimpa warna teks bawaan AdminLTE untuk kelas bg-* */
+.small-box.bg-warning .inner p, /* Untuk tulisan "Setoran Hari Ini" */
+.small-box.bg-warning .inner h3,
+.info-box.bg-warning .info-box-text,
+.info-box.bg-warning .info-box-number,
+.info-box.bg-warning .progress-description,
+/* Tambahkan juga untuk kelas bg-info, bg-success, bg-danger, bg-primary jika ada masalah yang sama */
+.small-box.bg-info .inner p, .small-box.bg-info .inner h3,
+.small-box.bg-success .inner p, .small-box.bg-success .inner h3,
+.small-box.bg-danger .inner p, .small-box.bg-danger .inner h3,
+.small-box.bg-primary .inner p, .small-box.bg-primary .inner h3,
+.info-box.bg-info .info-box-text, .info-box.bg-info .info-box-number, .info-box.bg-info .progress-description,
+.info-box.bg-success .info-box-text, .info-box.bg-success .info-box-number, .info-box.bg-success .progress-description,
+.info-box.bg-danger .info-box-text, .info-box.bg-danger .info-box-number, .info-box.bg-danger .progress-description,
+.info-box.bg-primary .info-box-text, .info-box.bg-primary .info-box-number, .info-box.bg-primary .progress-description {
+    color: var(--text-color) !important; /* Paksa teks menjadi putih */
+}
+
+.card {
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.1); 
+    border: 1px solid var(--border-color);
+    background-color: var(--form-bg);
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+.card:hover {
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+}
+
+.card-header {
+    border-bottom: 1px solid var(--border-color);
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 10px 10px 0 0 !important;
+    padding: 15px 20px;
+}
+
+.card-title {
+    font-weight: 600;
+    color: var(--neon-blue);
+    text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+}
+
+/* Small Box Styles */
+.small-box {
+    border-radius: 10px;
+    color: var(--text-color) !important;
+    position: relative;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.1);
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+}
+
+/* Override warna background untuk small-box */
+.small-box.bg-info { background-color: var(--neon-info) !important; }
+.small-box.bg-success { background-color: var(--neon-success) !important; }
+.small-box.bg-warning { background-color: var(--neon-warning) !important; }
+.small-box.bg-danger { background-color: var(--neon-danger) !important; }
+.small-box.bg-primary { background-color: var(--neon-primary) !important; }
+
+.small-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.3);
+}
+
+.small-box .inner {
+    padding: 15px;
+    position: relative;
+    z-index: 2;
+}
+
+.small-box h3 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin: 0 0 10px 0;
+    white-space: nowrap;
+    padding: 0;
+    color: var(--text-color) !important;
+    text-shadow: 0 0 3px rgba(0, 255, 255, 0.3);
+}
+
+.small-box p {
+    font-size: 1rem;
+    margin-bottom: 0;
+    color: var(--text-color) !important;
+    opacity: 0.8;
+}
+
+.small-box .icon {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 1;
+    font-size: 70px;
+    color: rgba(0, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.small-box:hover .icon {
+    font-size: 75px;
+    color: rgba(0, 255, 255, 0.2);
+}
+
+.small-box-footer {
+    background-color: rgba(0,0,0,0.3) !important;
+    color: var(--text-color) !important;
+    display: block;
+    padding: 8px 0;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 0 0 10px 10px;
+    transition: all 0.3s ease;
+}
+
+.small-box:hover .small-box-footer {
+    background-color: rgba(0,0,0,0.5) !important;
+    color: var(--neon-blue-light) !important;
+}
+
+/* Info Box Styles */
+.info-box {
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.1);
+    border-radius: 10px;
+    background-color: var(--form-bg);
+    display: flex;
+    margin-bottom: 15px;
+    min-height: 80px;
+    padding: 15px;
+    position: relative;
+    width: 100%;
+    transition: all 0.3s ease;
+    border-left: 4px solid var(--neon-blue);
+    border: 1px solid var(--border-color);
+}
+
+/* Warna border kiri spesifik jika diinginkan */
+.info-box.bg-info { border-left-color: var(--neon-info) !important; }
+.info-box.bg-success { border-left-color: var(--neon-success) !important; }
+.info-box.bg-warning { border-left-color: var(--neon-warning) !important; }
+.info-box.bg-danger { border-left-color: var(--neon-danger) !important; }
+.info-box.bg-primary { border-left-color: var(--neon-primary) !important; }
+
+.info-box:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.2);
+}
+
+.info-box-icon {
+    border-radius: 50%;
+    align-items: center;
+    display: flex;
+    font-size: 1.5rem;
+    justify-content: center;
+    text-align: center;
+    width: 60px;
+    height: 60px;
+    background-color: rgba(0, 255, 255, 0.1) !important;
+    box-shadow: 0 0 8px rgba(0, 255, 255, 0.3);
+    color: var(--neon-blue) !important;
+}
+
+.info-box-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    line-height: 1.4;
+    flex: 1;
+    padding: 0 15px;
+    color: var(--text-color);
+}
+
+.info-box-number {
+    display: block;
+    font-weight: 700;
+    font-size: 1.3rem;
+    margin-bottom: 3px;
+    color: var(--text-color);
+    text-shadow: 0 0 3px rgba(0, 255, 255, 0.3);
+}
+
+.info-box-text {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--neon-blue-light);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Content Header */
+.content-header {
+    padding: 20px 0;
+}
+
+.content-header h1 {
+    font-size: 1.8rem;
+    margin: 0;
+    font-weight: 600;
+    color: var(--neon-blue);
+    text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+}
+
+.breadcrumb {
+    background-color: transparent !important;
+    padding: 0;
+    margin-bottom: 0;
+}
+.breadcrumb-item a {
+    color: var(--neon-blue) !important;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+.breadcrumb-item a:hover {
+    color: var(--neon-blue-light) !important;
+    text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+}
+.breadcrumb-item.active {
+    color: var(--text-color) !important;
+}
+
+/* Last Update Styles */
+.last-update {
+    font-size: 0.8rem;
+    color: var(--placeholder-color);
+    margin-top: 5px;
+    transition: all 0.3s ease;
+}
+
+.last-update:hover {
+    color: var(--neon-blue-light);
+    transform: translateX(5px);
+}
+
+.last-update i {
+    margin-right: 5px;
+    color: var(--neon-blue);
+}
+
+/* Chart Container */
+.chart-container {
+    position: relative;
+    height: 350px;
+    width: 100%;
+    margin-bottom: 20px;
+    background-color: rgba(0,0,0,0.1);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+/* Selector Styles */
+.month-selector {
+    width: 150px;
+    display: inline-block;
+    margin-right: 10px;
+    border-radius: 5px;
+    border: 1px solid var(--border-color);
+    padding: 5px 10px;
+    background-color: var(--form-bg);
+    color: var(--text-color);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2300FFFF'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 12px;
+}
+.month-selector:focus {
+    outline: none;
+    border-color: var(--neon-blue);
+    box-shadow: 0 0 5px var(--neon-blue);
+}
+.month-selector option {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+/* ========================================================================== */
+/* Footer Styling */
+/* ========================================================================== */
+
+.main-footer {
+    background-color: var(--bg-color) !important;
+    color: var(--text-color) !important;
+    border-top: 1px solid rgba(0, 255, 255, 0.1) !important;
+    padding: 15px 20px;
+    box-shadow: 0 -5px 15px rgba(0, 255, 255, 0.1);
+}
+
+.main-footer strong {
+    color: var(--neon-blue);
+    text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+}
+
+.main-footer a {
+    color: var(--neon-blue) !important;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    text-shadow: 0 0 3px rgba(0, 255, 255, 0.3);
+}
+
+.main-footer a:hover {
+    color: var(--neon-blue-light) !important;
+    text-decoration: underline;
+    text-shadow: 0 0 8px rgba(0, 255, 255, 0.7);
+}
+
+.main-footer .float-right {
+    color: var(--text-color) !important;
+    opacity: 0.8;
+}
+.main-footer .float-right b {
+    color: var(--neon-blue-light);
+}
+
+/* ========================================================================== */
+/* Global Utility & Responsive Adjustments */
+/* ========================================================================== */
+
+/* Responsive Adjustments (Media Queries) */
+@media (max-width: 768px) {
+    .small-box h3 {
+        font-size: 1.8rem;
+    }
+    
+    .info-box {
+        padding: 10px;
+    }
+    
+    .info-box-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+    }
+    
+    .info-box-number {
+        font-size: 1.1rem;
+    }
+    
+    .chart-container {
+        height: 300px;
+    }
+    
+    .month-selector {
+        width: 120px;
+        margin-bottom: 10px;
+    }
+
+    /* Navbar Responsive */
+    .prayer-time-container {
+        display: none; /* Sembunyikan teks di layar kecil */
+    }
+    .realtime-clock-display {
+        font-size: 0.9em;
+        margin-right: 5px;
+    }
+}
+
+@media (max-width: 576px) {
+    .small-box h3 {
+        font-size: 1.5rem;
+    }
+    
+    .info-box {
+        margin-bottom: 10px;
+    }
+    
+    .chart-container {
+        height: 250px;
+    }
+
+    /* Footer Responsive */
+    .main-footer {
+        align-items: flex-start; /* Akan menata ke kiri di mobile jika flex column */
+        text-align: left; /* Penting untuk teks di mobile */
+    }
+    .main-footer .float-right {
+        float: none !important; /* Batalkan float agar berada di bawah di mobile */
+        margin-top: 5px;
+    }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1); /* Track gelap */
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 255, 255, 0.5); /* Thumb neon */
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--neon-blue); /* Thumb lebih terang saat hover */
+}
+
+/* Ripple Effect */
+.ripple {
+    position: absolute;
+    background: rgba(0,255,255,0.4); /* Warna ripple neon */
+    border-radius: 50%;
+    transform: scale(0);
+    animation: ripple 0.6s linear;
+    pointer-events: none;
+}
+
+@keyframes ripple {
+    to {
+        transform: scale(2.5);
+        opacity: 0;
+    }
+}
